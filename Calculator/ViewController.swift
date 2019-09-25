@@ -9,12 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var num1 = 0
-    private var num2 = 0
-    private var numOn = 0;
-    private var stepOn = 0;
-    private var currentOperator = "";
+    private var num1 = 0.0
+    private var num2 = 0.0
+    private var numOn = 0
+    private var stepOn = 0
+    private var completedCalculation = false
+    private var currentOperator = ""
+    private var decimal = 0.0
     @IBOutlet var display: UILabel!
+    private var text0 = ""
+    private var text1 = ""
+    private var text2 = ""
+    private var displayText = ""
+    
     
     
     override func viewDidLoad() {
@@ -34,12 +41,44 @@ class ViewController: UIViewController {
         if (stepOn == 2){
             display.text = "\(num1) \(currentOperator) \(num2)"
         }
+        
+        
+//        if (stepOn == 0){
+//            if(num1.truncatingRemainder(dividingBy: 1) == 0){
+//                text0 = "\(Int(num1))"
+//            }
+//            else{
+//                text0 = "\(num1)"
+//            }
+//            displayText = text0
+//        }
+//        if (stepOn == 1){
+//            text1 = text0 + " \(currentOperator)"
+//            stepOn = 2;
+//            displayText = text1
+//        }
+//        else if (stepOn == 2){
+//            text2 = text1 + " \(num2)"
+//            displayText = text2
+//        }
+//        display.text = displayText
     }
+    
+    
+    
+    
+    @IBAction func decimalPoint(_ sender: Any) {
+        decimal = 10
+    }
+    
+    
     
     @IBAction func addition(_ sender: Any) {
         stepOn = 1
         currentOperator = "+"
         numOn = 1
+        decimal = 0.0
+        completedCalculation = false
         updateDisplay()
     }
     
@@ -47,6 +86,8 @@ class ViewController: UIViewController {
         stepOn = 1
         currentOperator = "-"
         numOn = 1
+        decimal = 0.0
+        completedCalculation = false
         updateDisplay()
     }
     
@@ -54,6 +95,8 @@ class ViewController: UIViewController {
         stepOn = 1
         currentOperator = "x"
         numOn = 1
+        decimal = 0.0
+        completedCalculation = false
         updateDisplay()
     }
     
@@ -61,6 +104,8 @@ class ViewController: UIViewController {
         stepOn = 1
         currentOperator = "÷"
         numOn = 1
+        decimal = 0.0
+        completedCalculation = false
         updateDisplay()
     }
     
@@ -79,8 +124,9 @@ class ViewController: UIViewController {
         if(currentOperator == "÷"){
             num1 = num1 / num2
         }
-        
-        num2 = 0
+        decimal = 0.0
+        completedCalculation = true;
+        num2 = 0.0
         stepOn = 0
         numOn = 0
         updateDisplay()
@@ -92,6 +138,7 @@ class ViewController: UIViewController {
         num2 = 0
         stepOn = 0
         numOn = 0
+        decimal = 0.0
         updateDisplay()
     }
     
@@ -104,103 +151,323 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonNum1(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 1
+        let n = 1.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 1
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum2(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 2
+        let n = 2.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 2
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum3(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 3
+        let n = 3.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 3
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum4(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 4
+        let n = 4.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 4
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum5(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 5
+        let n = 5.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 5
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
         
     }
     
     @IBAction func buttonNum6(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 6
+        let n = 6.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 6
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum7(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 7
+        let n = 7.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 7
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum8(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 8
+        let n = 8.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 8
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum9(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 9
+        let n = 9.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 9
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
     @IBAction func buttonNum0(_ sender: Any) {
-        if numOn == 0 {
-            num1 = (num1 * 10) + 0
+        let n = 0.0
+        
+        
+        if completedCalculation{
+            num1 = n
+            completedCalculation = false
         }
-        if numOn == 1 {
-            num2 = (num2 * 10) + 0
+        else{
+            if(decimal >= 1){
+                if numOn == 0 {
+                    num1 = num1 + n / decimal
+                    decimal = decimal * 10
+                }
+                if numOn == 1 {
+                    num2 = num2 + n / decimal
+                    decimal = decimal * 10
+                }
+            }
+            else {
+                if numOn == 0 {
+                    num1 = (num1 * 10) + n
+                }
+                if numOn == 1 {
+                    num2 = (num2 * 10) + n
+                }
+            }
         }
+        
         updateDisplay()
     }
     
